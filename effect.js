@@ -8,17 +8,22 @@ $('document').ready(function(){
     $(window).resize(function(){
         var screenWidth = $(window).width();
         vw = screenWidth / 2;
-        // If screen is smaller than 800px, shrink the gap between balloons
-        var gap = screenWidth < 800 ? (screenWidth / 8.5) : 100;
         
+        // Dynamically calculate gap, and stagger the heights for mobile
+        var gap = screenWidth < 800 ? (screenWidth / 6.5) : 100;
+        var topUp = screenWidth < 800 ? 180 : 240;
+        var topDown = screenWidth < 800 ? 260 : 240;
+
         $('#b1,#b2,#b3,#b4,#b5,#b6,#b7').stop();
-        $('#b11').animate({top:240, left: vw - (3.5 * gap)},500);
-        $('#b22').animate({top:240, left: vw - (2.5 * gap)},500);
-        $('#b33').animate({top:240, left: vw - (1.5 * gap)},500);
-        $('#b44').animate({top:240, left: vw - (0.5 * gap)},500);
-        $('#b55').animate({top:240, left: vw + (0.5 * gap)},500);
-        $('#b66').animate({top:240, left: vw + (1.5 * gap)},500);
-        $('#b77').animate({top:240, left: vw + (2.5 * gap)},500);
+        
+        // Perfectly centered math (b4 is exactly in the middle)
+        $('#b11').animate({top: topUp, left: vw - (3 * gap)},500);
+        $('#b22').animate({top: topDown, left: vw - (2 * gap)},500);
+        $('#b33').animate({top: topUp, left: vw - (1 * gap)},500);
+        $('#b44').animate({top: topDown, left: vw},500);
+        $('#b55').animate({top: topUp, left: vw + (1 * gap)},500);
+        $('#b66').animate({top: topDown, left: vw + (2 * gap)},500);
+        $('#b77').animate({top: topUp, left: vw + (3 * gap)},500);
     });
 
     $('#turn_on').click(function(){
@@ -142,7 +147,9 @@ $('document').ready(function(){
 $('#wish_message').click(function(){
         var screenWidth = $(window).width();
         vw = screenWidth / 2;
-        var gap = screenWidth < 800 ? (screenWidth / 8.5) : 100;
+        var gap = screenWidth < 800 ? (screenWidth / 6.5) : 100;
+        var topUp = screenWidth < 800 ? 180 : 240;
+        var topDown = screenWidth < 800 ? 260 : 240;
 
         $('#b1,#b2,#b3,#b4,#b5,#b6,#b7').stop();
         $('#b1').attr('id','b11');
@@ -153,13 +160,13 @@ $('#wish_message').click(function(){
         $('#b6').attr('id','b66')
         $('#b7').attr('id','b77')
         
-        $('#b11').animate({top:240, left: vw - (3.5 * gap)},500);
-        $('#b22').animate({top:240, left: vw - (2.5 * gap)},500);
-        $('#b33').animate({top:240, left: vw - (1.5 * gap)},500);
-        $('#b44').animate({top:240, left: vw - (0.5 * gap)},500);
-        $('#b55').animate({top:240, left: vw + (0.5 * gap)},500);
-        $('#b66').animate({top:240, left: vw + (1.5 * gap)},500);
-        $('#b77').animate({top:240, left: vw + (2.5 * gap)},500);
+        $('#b11').animate({top: topUp, left: vw - (3 * gap)},500);
+        $('#b22').animate({top: topDown, left: vw - (2 * gap)},500);
+        $('#b33').animate({top: topUp, left: vw - (1 * gap)},500);
+        $('#b44').animate({top: topDown, left: vw},500);
+        $('#b55').animate({top: topUp, left: vw + (1 * gap)},500);
+        $('#b66').animate({top: topDown, left: vw + (2 * gap)},500);
+        $('#b77').animate({top: topUp, left: vw + (3 * gap)},500);
         
         $('.balloons').css('opacity','0.9');
         $('.balloons h2').fadeIn(3000);
@@ -167,7 +174,7 @@ $('#wish_message').click(function(){
             $('#story').fadeIn('slow');
         });
     });
-	
+
     $('#story').click(function(){
         $(this).fadeOut('slow');
         $('.cake').fadeOut('fast').promise().done(function(){
